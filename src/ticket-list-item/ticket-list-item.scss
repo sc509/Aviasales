@@ -1,0 +1,68 @@
+.ticket {
+  text-align: left;
+  margin-left: -51px;
+  width: 502px;
+  min-height: 184px;
+  margin-top: 20px;
+  background-color: #FFFFFF;
+
+  &__company-name {
+    display: inline-block;
+  }
+
+  &__booking-info {
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+  &__price {
+    margin-left: 20px;
+    margin-top: 26px;
+    color: #2196F3;
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: 600;
+
+  }
+
+  &__company-name {
+    margin-top: 20px;
+    margin-right: 20px;
+  }
+
+  &__data {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    &:first-child {
+      margin-top: 20px;
+    }
+
+    &:not(:first-child) {
+      margin-top: 10px;
+    }
+
+    &-route {
+      display: flex;
+      flex-direction: column;
+      margin-left: 20px;
+    }
+
+    &-en-route {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-transplants {
+      display: flex;
+      flex-direction: column;
+      margin-right: 20px;
+    }
+  }
+
+  &__allocated {
+    color: #A0B0B9;
+  }
+}

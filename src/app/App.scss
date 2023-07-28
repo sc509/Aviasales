@@ -1,0 +1,14 @@
+.aviasales{
+  &__main {
+    display: flex;
+    justify-content: space-between;
+    max-width: 80%; /* установите максимальную ширину по своему усмотрению */
+    margin: 0 auto;
+    &-left {
+      width: 30%;
+    }
+    &-right{
+      width: 70%;
+    }
+  }
+}

@@ -1,14 +1,21 @@
 .aviasales{
-  &__main {
+  &Header{
+
+  }
+  &Main {
     display: flex;
     justify-content: space-between;
     max-width: 80%;
     margin: 0 auto;
-    &-left {
+
+    &Left {
       width: 30%;
     }
-    &-right{
+    &Right{
       width: 70%;
     }
+  }
+  &Footer{
+
   }
 }

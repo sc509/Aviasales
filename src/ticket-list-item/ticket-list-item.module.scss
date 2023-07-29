@@ -10,10 +10,9 @@
     display: inline-block;
   }
 
-  &__booking-info {
+  &__bookingInfo {
     display: flex;
     justify-content: space-between;
-
   }
 
   &__price {
@@ -23,10 +22,9 @@
     font-size: 24px;
     line-height: 24px;
     font-weight: 600;
-
   }
 
-  &__company-name {
+  &__companyName {
     margin-top: 20px;
     margin-right: 20px;
   }
@@ -44,18 +42,18 @@
       margin-top: 10px;
     }
 
-    &-route {
+    &Route {
       display: flex;
       flex-direction: column;
       margin-left: 20px;
     }
 
-    &-en-route {
+    &EnRoute {
       display: flex;
       flex-direction: column;
     }
 
-    &-transplants {
+    &Transplants {
       display: flex;
       flex-direction: column;
       margin-right: 20px;

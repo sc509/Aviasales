@@ -1,38 +1,38 @@
-import './filter.scss'
+import styles from "./filter.module.scss";
 
 function Filter() {
     const title = 'Количество пересадок'
     return (
-        <section className="aviasales__filter">
-            <h1 className="aviasales__filter-title">{title.toUpperCase()}</h1>
-            <div className="aviasales__filter--hover">
-                <label className="checkbox-container">
+        <section className={styles.aviasales__filter}>
+            <h1 className={styles.aviasales__filterTitle}>{title.toUpperCase()}</h1>
+            <div className={styles.aviasales__filterHover}>
+                <label className={styles.checkboxContainer}>
                     <input type="checkbox"/>
-                    <span className="checkbox-container__text">Все</span>
+                    <span className={styles.checkboxContainer__text}>Все</span>
                 </label>
             </div>
-            <div className="aviasales__filter--hover">
-                <label className="checkbox-container">
+            <div className={styles.aviasales__filterHover}>
+                <label className={styles.checkboxContainer}>
                     <input type="checkbox"/>
-                    <span className="checkbox-container__text">Без пересадок</span>
+                    <span className={styles.checkboxContainer__text}>Без пересадок</span>
                 </label>
             </div>
-            <div className="aviasales__filter--hover">
-                <label className="checkbox-container">
+            <div className={styles.aviasales__filterHover}>
+                <label className={styles.checkboxContainer}>
                     <input type="checkbox"/>
-                    <span className="checkbox-container__text">1 пересадка</span>
+                    <span className={styles.checkboxContainer__text}>1 пересадка</span>
                 </label>
             </div>
-            <div className="aviasales__filter--hover">
-                <label className="checkbox-container">
+            <div className={styles.aviasales__filterHover}>
+                <label className={styles.checkboxContainer}>
                     <input type="checkbox"/>
-                    <span className="checkbox-container__text">2 пересадки</span>
+                    <span className={styles.checkboxContainer__text}>2 пересадки</span>
                 </label>
             </div>
-            <div className="aviasales__filter--hover">
-                <label className="checkbox-container">
+            <div className={styles.aviasales__filterHover}>
+                <label className={styles.checkboxContainer}>
                     <input type="checkbox"/>
-                    <span className="checkbox-container__text">3 пересадки</span>
+                    <span className={styles.checkboxContainer__text}>3 пересадки</span>
                 </label>
             </div>
         </section>

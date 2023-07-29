@@ -1,26 +1,26 @@
-import './App.scss';
 import Logo from "../logo/logo";
 import Filter from "../filter/filter";
 import Tabs from "../tabs/tabs";
 import TicketList from "../ticket-list/ticket-list";
 import ShowMore from "../show-more/show-more";
-import "./App.scss"
+import styles from "./App.module.scss";
+
 function App() {
     return (
-        <div className="aviasales">
-            <header className="aviasales__header">
+        <div className={styles.aviasales}>
+            <header className={styles.aviasalesHeader}>
                 <Logo/>
             </header>
-            <main className="aviasales__main">
-                <div className="aviasales__main-left">
+            <main className={styles.aviasalesMain}>
+                <div className={styles.aviasalesMainLeft}>
                     <Filter/>
                 </div>
-                <div className="aviasales__main-right">
+                <div className={styles.aviasalesMainRight}>
                     <Tabs/>
                     <TicketList/>
                 </div>
             </main>
-            <footer className="aviasales__footer">
+            <footer className={styles.aviasalesFooter}>
                 <ShowMore/>
             </footer>
         </div>
@@ -28,4 +28,3 @@ function App() {
 }
 
 export default App;
-

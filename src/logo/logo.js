@@ -1,9 +1,9 @@
 import logo from '../assets/Logo.png'
-import './logo.scss'
+import styles from  './logo.module.scss'
 
 function Logo(){
     return(
-        <div className="aviasales__logo">
+        <div className={styles.aviasales__logo}>
             <img src={logo} alt="Logo"/>
         </div>
     )

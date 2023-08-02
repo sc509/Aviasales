@@ -1,4 +1,4 @@
-import {ALLCHECKED, UNCHECKEDALL, TOGGLECHECK} from "./types";
+import {TOGGLE_CHECK, ALL_CHECKED, UN_CHECKED_ALL} from "./types";
 
 const initialState = {
     allChecked: false,
@@ -11,7 +11,7 @@ const initialState = {
 
 export const filterReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ALLCHECKED:
+        case ALL_CHECKED:
             return {
                 ...state,
                 allChecked: true,
@@ -20,7 +20,7 @@ export const filterReducer = (state = initialState, action) => {
                 threeChecked: true,
                 fourChecked: true,
             }
-        case UNCHECKEDALL:
+        case UN_CHECKED_ALL:
             return {
                 ...state,
                 allChecked: false,
@@ -29,7 +29,7 @@ export const filterReducer = (state = initialState, action) => {
                 threeChecked: false,
                 fourChecked: false,
             }
-        case TOGGLECHECK:
+        case TOGGLE_CHECK:
             const newState = {
                 ...state,
                 [action.payload]: !state[action.payload],

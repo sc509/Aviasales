@@ -1,6 +1,6 @@
 import styles from "./filter.module.scss";
 import {useDispatch, useSelector} from "react-redux";
-import {filterAllUnchecked, filterAllChecked, toggleCheck} from "../redux/actions";
+import {filterAllUnchecked, filterAllChecked, toggleCheck, filterTickets} from "../redux/actions";
 
 function Filter() {
     const title = 'Количество пересадок'
@@ -10,13 +10,15 @@ function Filter() {
     const handleAllCheckBoxChange = (e) => {
         if (e.target.checked) {
             dispatch(filterAllChecked());
-        }
-        if (!e.target.checked) {
+            dispatch(filterTickets());
+        } else {
             dispatch(filterAllUnchecked());
         }
     }
+
     const handleCheckBoxChange = (name) => {
         dispatch(toggleCheck(name));
+        dispatch(filterTickets());
     }
 
     return (
@@ -30,7 +32,7 @@ function Filter() {
             </div>
             <div className={styles.aviasales__filterHover}>
                 <label className={styles.checkboxContainer}>
-                    <input type="checkbox" checked={oneChecked}  onChange={() => handleCheckBoxChange('oneChecked')}/>
+                    <input type="checkbox" checked={oneChecked} onChange={() => handleCheckBoxChange('oneChecked')}/>
                     <span className={styles.checkboxContainer__text}>Без пересадок</span>
                 </label>
             </div>
@@ -42,7 +44,8 @@ function Filter() {
             </div>
             <div className={styles.aviasales__filterHover}>
                 <label className={styles.checkboxContainer}>
-                    <input type="checkbox" checked={threeChecked} onChange={() => handleCheckBoxChange('threeChecked')}/>
+                    <input type="checkbox" checked={threeChecked}
+                           onChange={() => handleCheckBoxChange('threeChecked')}/>
                     <span className={styles.checkboxContainer__text}>2 пересадки</span>
                 </label>
             </div>

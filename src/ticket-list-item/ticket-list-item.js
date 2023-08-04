@@ -1,14 +1,8 @@
 import companyLogo from '../assets/S7 Logo.png';
 import styles from "./ticket-list-item.module.scss";
-import { transformMinutes } from "../Utilities/transformMinutes";
 import {transformStops} from "../Utilities/transformStops";
-import {transformHours} from "../Utilities/transformHours";
 import {addDurationToDate} from "../Utilities/addDurationToDate";
-
-function formatTime(dateString) {
-    const date = new Date(dateString);
-    return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
-}
+import {formatTime} from "../Utilities/formatTime";
 
 function TicketSegment({ segment }) {
     const hours = Math.floor(segment.duration / 60);
@@ -26,7 +20,7 @@ function TicketSegment({ segment }) {
             </div>
             <div className={styles.ticket__dataEnRoute}>
                 <span className={styles.ticket__allocated}>В пути</span>
-                <span>{hours} {transformHours(hours)} {minutes} {transformMinutes(minutes)}</span>
+                <span>{hours} ч {minutes} м</span>
             </div>
             <div className={styles.ticket__dataTransplants}>
                 {stopsCount > 0 ?

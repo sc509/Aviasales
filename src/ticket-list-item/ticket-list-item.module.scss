@@ -31,7 +31,6 @@
 
   &__data {
     display: flex;
-    justify-content: space-between;
     margin-top: 20px;
 
     &:first-child {
@@ -44,17 +43,22 @@
 
     &Route {
       display: flex;
+      width: 141px;
       flex-direction: column;
       margin-left: 20px;
+      margin-right: 20px;
     }
 
     &EnRoute {
       text-align: left;
       display: flex;
       flex-direction: column;
+      margin-right: 20px;
+      width: 141px;
     }
 
     &Transplants {
+      text-align: left;
       display: flex;
       flex-direction: column;
       margin-right: 20px;

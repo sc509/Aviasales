@@ -13,6 +13,13 @@
     }
     &Right{
       width: 70%;
+      &Loader{
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        margin-left: 175px;
+      }
+
     }
   }
   &Footer{

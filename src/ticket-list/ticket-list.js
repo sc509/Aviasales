@@ -5,15 +5,19 @@ import {useDispatch, useSelector} from "react-redux";
 
 function TicketList(){
     const dispatch = useDispatch();
-    const searchId = localStorage.getItem('searchId');
+    const searchId = useSelector(state => state.ticket.searchId);
     const tickets = useSelector(state => state.ticket.tickets);
+
     useEffect(() => {
         if (!searchId) {
-            dispatch(getSearchId());
+            dispatch(getSearchId()).then(newSearchId => {
+                dispatch(getStackTickets(newSearchId));
+            });
         } else {
             dispatch(getStackTickets(searchId));
         }
     }, [dispatch, searchId]);
+
     return(
         <div className="aviasales__ticket-list">
             {

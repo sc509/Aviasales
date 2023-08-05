@@ -6,7 +6,6 @@ function Filter() {
     const title = 'Количество пересадок'
     const dispatch = useDispatch();
     const {allChecked, oneChecked, twoChecked, threeChecked, fourChecked} = useSelector(state => state.filter);
-
     const handleAllCheckBoxChange = (e) => {
         if (e.target.checked) {
             dispatch(filterAllChecked());

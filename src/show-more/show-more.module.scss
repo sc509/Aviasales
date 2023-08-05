@@ -1,6 +1,9 @@
 .showMore {
   margin-left: -175px;
   margin-top: 20px;
+  @media(max-width: 420px){
+    margin-left: 0;
+  }
 }
 .showMore__button{
   width: 502px;
@@ -8,4 +11,7 @@
   background-color: #2196F3;
   color: #FFFFFF;
   border: none;
+  @media(max-width: 420px){
+    width: 300px;
+  }
 }

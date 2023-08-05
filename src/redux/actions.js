@@ -89,17 +89,31 @@ export function filterTickets() {
         const { tickets } = getState().ticket;
         const {allChecked, oneChecked, twoChecked, threeChecked, fourChecked } = getState().filter;
 
-        let filteredTickets;
+        let filteredTickets = [];
         let ticketsCopy = [...tickets];
+
         if (allChecked) {
             filteredTickets = ticketsCopy;
         } else {
-            filteredTickets = tickets.filter(ticket =>
-                (oneChecked && ticket.segments.every(segment => segment.stops.length === 0)) ||
-                (twoChecked && ticket.segments.every(segment => segment.stops.length === 1)) ||
-                (threeChecked && ticket.segments.every(segment => segment.stops.length === 2)) ||
-                (fourChecked && ticket.segments.every(segment => segment.stops.length === 3))
-            );
+            ticketsCopy.forEach(ticket => {
+                const outboundSegmentMatches = (oneChecked && ticket.segments[0].stops.length === 0)
+                    || (twoChecked && ticket.segments[0].stops.length === 1)
+                    || (threeChecked && ticket.segments[0].stops.length === 2)
+                    || (fourChecked && ticket.segments[0].stops.length === 3);
+
+                const returnSegmentMatches = (oneChecked && ticket.segments[1].stops.length === 0)
+                    || (twoChecked && ticket.segments[1].stops.length === 1)
+                    || (threeChecked && ticket.segments[1].stops.length === 2)
+                    || (fourChecked && ticket.segments[1].stops.length === 3);
+
+                if (outboundSegmentMatches && returnSegmentMatches) {
+                    filteredTickets.push(ticket);
+                }
+            });
+        }
+
+        if (filteredTickets.length === 0) {
+            alert('Рейсов, подходящих под заданные фильтры, не найдено');
         }
 
         dispatch({

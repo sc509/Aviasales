@@ -1,8 +1,8 @@
-import companyLogo from '../assets/S7 Logo.png';
+import companyLogo from '../../assets/S7 Logo.png';
 import styles from "./ticket-list-item.module.scss";
-import {transformStops} from "../Utilities/transformStops";
-import {addDurationToDate} from "../Utilities/addDurationToDate";
-import {formatTime} from "../Utilities/formatTime";
+import {transformStops} from "../../Utilities/transformStops";
+import {addDurationToDate} from "../../Utilities/addDurationToDate";
+import {formatTime} from "../../Utilities/formatTime";
 
 function TicketSegment({ segment }) {
     const hours = Math.floor(segment.duration / 60);

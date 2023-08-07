@@ -1,6 +1,6 @@
 import styles from "./filter.module.scss";
 import {useDispatch, useSelector} from "react-redux";
-import {filterAllUnchecked, filterAllChecked, toggleCheck, filterTickets} from "../redux/actions";
+import {filterAllUnchecked, filterAllChecked, toggleCheck, filterTickets} from "../../redux/actions";
 
 function Filter() {
     const title = 'Количество пересадок'

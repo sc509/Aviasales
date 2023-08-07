@@ -1,6 +1,6 @@
 import TicketListItem from "../ticket-list-item/ticket-list-item";
 import {useEffect} from "react";
-import {getSearchId, getStackTickets} from "../redux/actions";
+import {getSearchId, getStackTickets} from "../../redux/actions";
 import {useDispatch, useSelector} from "react-redux";
 
 function TicketList(){

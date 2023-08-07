@@ -1,1 +1,1 @@
-https://aviasales-gilt-nu.vercel.app
+https://aviasales-kentormentor92-gmailcom.vercel.app

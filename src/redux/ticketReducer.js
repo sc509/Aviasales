@@ -5,7 +5,7 @@ import {
     START_LOADING,
     STOP_LOADING,
     NO_TICKETS_FOUND,
-    CHEAPEST_TICKETS
+    CHEAPEST_TICKETS, FIVE_TICKETS
 } from "./types";
 
 const initialState = {
@@ -14,6 +14,7 @@ const initialState = {
     allTickets: [],
     loading: false,
     noTicketsFounds: false,
+    fiveTickets: 5,
 };
 
 export const ticketReducer = (state = initialState, action) => {
@@ -54,6 +55,11 @@ export const ticketReducer = (state = initialState, action) => {
             return {
                 ...state,
                 tickets: action.payload,
+            }
+        case FIVE_TICKETS:
+            return {
+                ...state,
+                fiveTickets: state.fiveTickets + action.payload,
             }
 
         default:

@@ -7,7 +7,7 @@ import {
     FILTER_TICKET,
     START_LOADING,
     STOP_LOADING,
-    NO_TICKETS_FOUND, CHEAPEST_TICKETS
+    NO_TICKETS_FOUND, CHEAPEST_TICKETS, FIVE_TICKETS
 } from "./types";
 
 export function filterAllChecked() {
@@ -156,4 +156,11 @@ export function cheapestTickets(){
             payload: cheapest,
         })
     }
+}
+
+export function showMoreTickets (amount)  {
+    return {
+        type: 'FIVE_TICKETS',
+        payload: amount,
+    };
 }

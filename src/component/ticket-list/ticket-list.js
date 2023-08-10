@@ -8,6 +8,7 @@ function TicketList(){
     const dispatch = useDispatch();
     const searchId = useSelector(state => state.ticket.searchId);
     const tickets = useSelector(state => state.ticket.tickets);
+    const fiveTickets = useSelector(state => state.ticket.fiveTickets)
     const noTicketsFounds = useSelector(state => state.ticket.noTicketsFounds)
     useEffect(() => {
         if (!searchId) {
@@ -26,7 +27,7 @@ function TicketList(){
     return(
         <div className="aviasales__ticket-list">
             {
-                tickets.slice(0, 5).map((ticket, index) => <TicketListItem key={index} ticket={ticket} />)
+                tickets.slice(0, fiveTickets).map((ticket, index) => <TicketListItem key={index} ticket={ticket} />)
             }
         </div>
     )

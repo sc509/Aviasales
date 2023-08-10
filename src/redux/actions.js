@@ -160,7 +160,7 @@ export function cheapestTickets(){
 
 export function showMoreTickets (amount)  {
     return {
-        type: 'FIVE_TICKETS',
+        type: FIVE_TICKETS,
         payload: amount,
     };
 }

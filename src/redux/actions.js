@@ -1,4 +1,14 @@
-import {ALL_CHECKED, UN_CHECKED_ALL, TOGGLE_CHECK, TICKETS_LOAD, GET_SEARCH_ID, FILTER_TICKET, START_LOADING, STOP_LOADING} from "./types";
+import {
+    ALL_CHECKED,
+    UN_CHECKED_ALL,
+    TOGGLE_CHECK,
+    TICKETS_LOAD,
+    GET_SEARCH_ID,
+    FILTER_TICKET,
+    START_LOADING,
+    STOP_LOADING,
+    NO_TICKETS_FOUND, CHEAPEST_TICKETS
+} from "./types";
 
 export function filterAllChecked() {
     return {
@@ -86,11 +96,19 @@ export function getStackTickets(searchId){
 
 export function filterTickets() {
     return (dispatch, getState) => {
-        const { tickets } = getState().ticket;
+        const { allTickets } = getState().ticket;
         const {allChecked, oneChecked, twoChecked, threeChecked, fourChecked } = getState().filter;
 
+        if (!(allChecked || oneChecked || twoChecked || threeChecked || fourChecked)) {
+            dispatch({
+                type: FILTER_TICKET,
+                payload: allTickets,
+            });
+            return;
+        }
+
         let filteredTickets = [];
-        let ticketsCopy = [...tickets];
+        let ticketsCopy = [...allTickets];
 
         if (allChecked) {
             filteredTickets = ticketsCopy;
@@ -113,12 +131,29 @@ export function filterTickets() {
         }
 
         if (filteredTickets.length === 0) {
-            alert('Рейсов, подходящих под заданные фильтры, не найдено');
+            dispatch({ type: NO_TICKETS_FOUND})
         }
 
         dispatch({
             type: FILTER_TICKET,
             payload: filteredTickets,
         });
+    }
+}
+
+export function cheapestTickets(){
+    return(dispatch, getState) => {
+        const { tickets } = getState().ticket;
+
+        function compareByPrice(a, b) {
+            return a.price - b.price;
+        }
+
+        const cheapest = tickets.sort(compareByPrice)
+
+        dispatch({
+            type: CHEAPEST_TICKETS,
+            payload: cheapest,
+        })
     }
 }

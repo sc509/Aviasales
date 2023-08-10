@@ -1,6 +1,10 @@
 .aviasales__tabs{
   display: flex;
   margin-left: -51px;
+  @media(max-width: 1500px){
+    margin-left: -51px;
+    margin-top: 20px;
+  }
   @media(max-width: 420px){
     margin-left: 10px;
     margin-top: 20px;

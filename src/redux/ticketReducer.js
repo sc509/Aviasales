@@ -1,9 +1,19 @@
-import {GET_SEARCH_ID, TICKETS_LOAD, FILTER_TICKET, START_LOADING, STOP_LOADING} from "./types";
+import {
+    GET_SEARCH_ID,
+    TICKETS_LOAD,
+    FILTER_TICKET,
+    START_LOADING,
+    STOP_LOADING,
+    NO_TICKETS_FOUND,
+    CHEAPEST_TICKETS
+} from "./types";
 
 const initialState = {
     searchId: null,
     tickets: [],
+    allTickets: [],
     loading: false,
+    noTicketsFounds: false,
 };
 
 export const ticketReducer = (state = initialState, action) => {
@@ -16,6 +26,8 @@ export const ticketReducer = (state = initialState, action) => {
         case TICKETS_LOAD:
             return {
                 ...state,
+                noTicketsFounds: false,
+                allTickets: [...state.allTickets, ...action.tickets],
                 tickets: [...state.tickets, ...action.tickets],
             }
         case FILTER_TICKET:
@@ -33,6 +45,17 @@ export const ticketReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
             }
+        case NO_TICKETS_FOUND:
+            return {
+                ...state,
+                noTicketsFounds: true,
+            }
+        case CHEAPEST_TICKETS:
+            return {
+                ...state,
+                tickets: action.payload,
+            }
+
         default:
             return state;
     }

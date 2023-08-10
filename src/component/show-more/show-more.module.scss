@@ -1,6 +1,12 @@
 .showMore {
   margin-left: -175px;
   margin-top: 20px;
+  @media(max-width: 1500px){
+    margin-left: -124px;
+  }
+  @media(max-width: 420px){
+    margin-left: 0;
+  }
   @media(max-width: 420px){
     margin-left: 0;
   }

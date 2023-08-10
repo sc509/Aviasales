@@ -13,8 +13,7 @@ const store = createStore(rootReducer, compose(
     ),
     window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
 ))
-localStorage.removeItem('searchId');
-localStorage.removeItem('state');
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>

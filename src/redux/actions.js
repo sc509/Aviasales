@@ -10,6 +10,8 @@ import {
     NO_TICKETS_FOUND, CHEAPEST_TICKETS, FIVE_TICKETS
 } from "./types";
 
+const BASE_URL = 'https://aviasales-test-api.kata.academy';
+
 export function filterAllChecked() {
     return {
         type: ALL_CHECKED,
@@ -39,17 +41,14 @@ export function startLoading(){
 
 export function getSearchId(){
     return async dispatch => {
-        let searchId = localStorage.getItem('searchId');
-        if (!searchId) {
-            const response = await fetch('https://aviasales-test-api.kata.academy/search');
-            const jsonSearchId = await response.json();
-            searchId = jsonSearchId.searchId;
-            localStorage.setItem('searchId', searchId);
-        }
+        const response = await fetch(`${BASE_URL}/search`);
+        const jsonSearchId = await response.json();
+        const searchId = jsonSearchId.searchId;
+
         dispatch({
             type: GET_SEARCH_ID,
             searchId,
-        })
+        });
     }
 }
 
@@ -63,7 +62,7 @@ export function getStackTickets(searchId){
 
         const fetchTickets = async () => {
             try {
-                const response = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`);
+                const response = await fetch(`${BASE_URL}/tickets?searchId=${searchId}`);
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);

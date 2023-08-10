@@ -27,7 +27,11 @@ function TicketList(){
     return(
         <div className="aviasales__ticket-list">
             {
-                tickets.slice(0, fiveTickets).map((ticket, index) => <TicketListItem key={index} ticket={ticket} />)
+                tickets.slice(0, fiveTickets).map((ticket) => {
+                    const ticketKey = `${ticket.carrier}-${ticket.segments[0].date}-${ticket.segments[1].date}`;
+                    console.log(ticketKey)
+                    return <TicketListItem key={ticketKey} ticket={ticket} />
+                })
             }
         </div>
     )

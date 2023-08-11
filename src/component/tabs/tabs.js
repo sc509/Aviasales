@@ -9,11 +9,11 @@ function Tabs(){
     const handleCheapestTab = () => {
         dispatch(cheapestTickets())
     }
-
+    const {aviasales__tabs,aviasales__tabsCheapest,aviasales__tabsFastest } = styles;
     return(
-        <section className={styles.aviasales__tabs}>
-            <button className={styles.aviasales__tabsCheapest} onClick={handleCheapestTab}>{cheapest.toUpperCase()}</button>
-            <button className={styles.aviasales__tabsFastest}>{fastest.toUpperCase()}</button>
+        <section className={aviasales__tabs}>
+            <button className={aviasales__tabsCheapest} onClick={handleCheapestTab}>{cheapest.toUpperCase()}</button>
+            <button className={aviasales__tabsFastest}>{fastest.toUpperCase()}</button>
         </section>
     )
 }

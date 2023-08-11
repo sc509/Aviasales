@@ -29,36 +29,46 @@ export const toggleCheck = (name) => ({
     payload: name,
 });
 
-export function startLoading(){
-    return{
+export function startLoading() {
+    return {
         type: START_LOADING,
     }
-}export function stopLoading(){
-    return{
+}
+
+export function stopLoading() {
+    return {
         type: STOP_LOADING,
     }
 }
 
-export function getSearchId(){
+export function getSearchId() {
     return async dispatch => {
-        const response = await fetch(`${BASE_URL}/search`);
-        const jsonSearchId = await response.json();
-        const searchId = jsonSearchId.searchId;
+        try {
+            const response = await fetch(`${BASE_URL}/search`);
 
-        dispatch({
-            type: GET_SEARCH_ID,
-            searchId,
-        });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const jsonSearchId = await response.json();
+            const searchId = jsonSearchId.searchId;
+
+            dispatch({
+                type: GET_SEARCH_ID,
+                searchId,
+            });
+        } catch (error) {
+            throw new Error(`Failed to fetch search ID: ${error}`);
+        }
     }
 }
 
-export function getStackTickets(searchId){
+export function getStackTickets(searchId) {
     return async dispatch => {
         if (!searchId) {
             return;
         }
         dispatch(startLoading());
-        let intervalId;
 
         const fetchTickets = async () => {
             try {
@@ -71,32 +81,36 @@ export function getStackTickets(searchId){
                 const jsonTickets = await response.json();
 
                 if (jsonTickets.stop) {
-                    clearInterval(intervalId);
                     dispatch(stopLoading());
+                    return false;
                 }
 
                 dispatch({
                     type: TICKETS_LOAD,
                     tickets: jsonTickets.tickets,
                 });
+
+                return true;
             } catch (error) {
-                if (error.message.includes('500')) {
-                } else {
-                    clearInterval(intervalId);
+                if (!error.message.includes('500')) {
                     dispatch(stopLoading());
+                    return false;
                 }
+                return true;
             }
         };
 
-        intervalId = setInterval(fetchTickets, 1000);
+        let keepFetching = true;
+        while (keepFetching) {
+            keepFetching = await fetchTickets();
+        }
     }
 }
 
-
 export function filterTickets() {
     return (dispatch, getState) => {
-        const { allTickets } = getState().ticket;
-        const {allChecked, oneChecked, twoChecked, threeChecked, fourChecked } = getState().filter;
+        const {allTickets} = getState().ticket;
+        const {allChecked, oneChecked, twoChecked, threeChecked, fourChecked} = getState().filter;
 
         if (!(allChecked || oneChecked || twoChecked || threeChecked || fourChecked)) {
             dispatch({
@@ -130,7 +144,7 @@ export function filterTickets() {
         }
 
         if (filteredTickets.length === 0) {
-            dispatch({ type: NO_TICKETS_FOUND})
+            dispatch({type: NO_TICKETS_FOUND})
         }
 
         dispatch({
@@ -140,9 +154,9 @@ export function filterTickets() {
     }
 }
 
-export function cheapestTickets(){
-    return(dispatch, getState) => {
-        const { tickets } = getState().ticket;
+export function cheapestTickets() {
+    return (dispatch, getState) => {
+        const {tickets} = getState().ticket;
 
         function compareByPrice(a, b) {
             return a.price - b.price;
@@ -157,7 +171,7 @@ export function cheapestTickets(){
     }
 }
 
-export function showMoreTickets (amount)  {
+export function showMoreTickets(amount) {
     return {
         type: FIVE_TICKETS,
         payload: amount,

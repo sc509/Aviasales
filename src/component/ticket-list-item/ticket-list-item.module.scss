@@ -1,14 +1,17 @@
 .ticket {
-  text-align: left;
-  margin-left: -51px;
-  width: 502px;
-  min-height: 184px;
-  margin-top: 20px;
-  background-color: #FFFFFF;
-  @media (max-width: 420px){
-    width: 420px;
-    margin-left: -40px;
+  &__main {
+    text-align: left;
+    margin-left: -51px;
+    width: 502px;
+    min-height: 184px;
+    margin-top: 20px;
+    background-color: #FFFFFF;
+    @media (max-width: 420px) {
+      width: 420px;
+      margin-left: -40px;
+    }
   }
+
   &__company-name {
     display: inline-block;
   }
@@ -50,7 +53,7 @@
       flex-direction: column;
       margin-left: 20px;
       margin-right: 20px;
-      }
+    }
 
     &EnRoute {
       text-align: left;

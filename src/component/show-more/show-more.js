@@ -8,9 +8,10 @@ function ShowMore() {
     const handleShowMoreClick = () => {
         dispatch(showMoreTickets(5))
     }
+    const {showMoreCont,showMore__button} = styles;
     return (
-        <div className={styles.showMore}>
-            <button className={styles.showMore__button} onClick={handleShowMoreClick}>{showMore.toUpperCase()}</button>
+        <div className={showMoreCont}>
+            <button className={showMore__button} onClick={handleShowMoreClick}>{showMore.toUpperCase()}</button>
         </div>
     )
 }

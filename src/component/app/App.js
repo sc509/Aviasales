@@ -7,24 +7,33 @@ import styles from "./App.module.scss";
 import Loader from "../loader/loader";
 
 function App() {
+    const {
+        aviasales,
+        aviasalesHeader,
+        aviasalesMain,
+        aviasalesMainLeft,
+        aviasalesMainRight,
+        aviasalesMainRightLoader,
+        aviasalesFooter
+    } = styles;
     return (
-        <div className={styles.aviasales}>
-            <header className={styles.aviasalesHeader}>
+        <div className={aviasales}>
+            <header className={aviasalesHeader}>
                 <Logo/>
             </header>
-            <main className={styles.aviasalesMain}>
-                <div className={styles.aviasalesMainLeft}>
+            <main className={aviasalesMain}>
+                <div className={aviasalesMainLeft}>
                     <Filter/>
                 </div>
-                <div className={styles.aviasalesMainRight}>
+                <div className={aviasalesMainRight}>
                     <Tabs/>
-                    <div className={styles.aviasalesMainRightLoader}>
+                    <div className={aviasalesMainRightLoader}>
                         <Loader/>
                     </div>
                     <TicketList/>
                 </div>
             </main>
-            <footer className={styles.aviasalesFooter}>
+            <footer className={aviasalesFooter}>
                 <ShowMore/>
             </footer>
         </div>

@@ -20,38 +20,46 @@ function Filter() {
         dispatch(filterTickets());
     }
 
+    const {
+        aviasales__filter,
+        aviasales__filterTitle,
+        aviasales__filterHover,
+        checkboxContainer,
+        checkboxContainer__text
+    } = styles
+
     return (
-        <section className={styles.aviasales__filter}>
-            <h1 className={styles.aviasales__filterTitle}>{title.toUpperCase()}</h1>
-            <div className={styles.aviasales__filterHover}>
-                <label className={styles.checkboxContainer}>
+        <section className={aviasales__filter}>
+            <h1 className={aviasales__filterTitle}>{title.toUpperCase()}</h1>
+            <div className={aviasales__filterHover}>
+                <label className={checkboxContainer}>
                     <input type="checkbox" checked={allChecked} onChange={handleAllCheckBoxChange}/>
-                    <span className={styles.checkboxContainer__text}>Все</span>
+                    <span className={checkboxContainer__text}>Все</span>
                 </label>
             </div>
-            <div className={styles.aviasales__filterHover}>
-                <label className={styles.checkboxContainer}>
+            <div className={aviasales__filterHover}>
+                <label className={checkboxContainer}>
                     <input type="checkbox" checked={oneChecked} onChange={() => handleCheckBoxChange('oneChecked')}/>
-                    <span className={styles.checkboxContainer__text}>Без пересадок</span>
+                    <span className={checkboxContainer__text}>Без пересадок</span>
                 </label>
             </div>
-            <div className={styles.aviasales__filterHover}>
-                <label className={styles.checkboxContainer}>
+            <div className={aviasales__filterHover}>
+                <label className={checkboxContainer}>
                     <input type="checkbox" checked={twoChecked} onChange={() => handleCheckBoxChange('twoChecked')}/>
-                    <span className={styles.checkboxContainer__text}>1 пересадка</span>
+                    <span className={checkboxContainer__text}>1 пересадка</span>
                 </label>
             </div>
-            <div className={styles.aviasales__filterHover}>
-                <label className={styles.checkboxContainer}>
+            <div className={aviasales__filterHover}>
+                <label className={checkboxContainer}>
                     <input type="checkbox" checked={threeChecked}
                            onChange={() => handleCheckBoxChange('threeChecked')}/>
-                    <span className={styles.checkboxContainer__text}>2 пересадки</span>
+                    <span className={checkboxContainer__text}>2 пересадки</span>
                 </label>
             </div>
-            <div className={styles.aviasales__filterHover}>
-                <label className={styles.checkboxContainer}>
+            <div className={aviasales__filterHover}>
+                <label className={checkboxContainer}>
                     <input type="checkbox" checked={fourChecked} onChange={() => handleCheckBoxChange('fourChecked')}/>
-                    <span className={styles.checkboxContainer__text}>3 пересадки</span>
+                    <span className={checkboxContainer__text}>3 пересадки</span>
                 </label>
             </div>
         </section>

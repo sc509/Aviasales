@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import styles from "./ticket-list.module.scss"
 
 function TicketList(){
+    const { error, aviasales__ticketList } = styles;
     const dispatch = useDispatch();
     const searchId = useSelector(state => state.ticket.searchId);
     const tickets = useSelector(state => state.ticket.tickets);
@@ -21,15 +22,14 @@ function TicketList(){
     }, [dispatch, searchId]);
 
     if(noTicketsFounds){
-        return <div className={styles.error}>Рейсов, подходящих под заданные фильтры, не найдено</div>
+        return <div className={error}>Рейсов, подходящих под заданные фильтры, не найдено</div>
     }
 
     return(
-        <div className="aviasales__ticket-list">
+        <div className={aviasales__ticketList}>
             {
                 tickets.slice(0, fiveTickets).map((ticket) => {
                     const ticketKey = `${ticket.carrier}-${ticket.segments[0].date}-${ticket.segments[1].date}`;
-                    console.log(ticketKey)
                     return <TicketListItem key={ticketKey} ticket={ticket} />
                 })
             }

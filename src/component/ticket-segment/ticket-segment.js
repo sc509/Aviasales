@@ -1,7 +1,7 @@
 import styles from '../ticket-list-item/ticket-list-item.module.scss';
 import addDurationToDate from '../../Utilities/addDurationToDate';
-import { formatTime } from '../../Utilities/formatTime';
-import { transformStops } from '../../Utilities/transformStops';
+import formatTime from '../../Utilities/formatTime';
+import transformStops from '../../Utilities/transformStops';
 
 function TicketSegment({ segment }) {
   const { ticketData, ticketDataRoute, ticketAllocated, ticketDataEnRoute, ticketDtaTransplants } = styles;

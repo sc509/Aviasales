@@ -56,8 +56,11 @@
     "react/react-in-jsx-scope": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "no-underscore-dangle": ["error", { "allow": ["__REDUX_DEVTOOLS_EXTENSION__"] }],
     "react/prop-types": 0,
     "react/state-in-constructor": "off",
+    "no-await-in-loop": "off",
+    "default-param-last": "off",
     "import/no-unresolved": [
       2,
       {

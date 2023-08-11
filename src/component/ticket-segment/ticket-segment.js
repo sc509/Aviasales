@@ -11,7 +11,6 @@ function TicketSegment({ segment }) {
     const stopsCount = segment.stops.length;
 
     const arrivalTime = addDurationToDate(segment.date, segment.duration);
-
     return (
         <div className={ticket__data}>
             <div className={ticket__dataRoute}>

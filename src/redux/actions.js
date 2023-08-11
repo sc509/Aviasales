@@ -7,7 +7,7 @@ import {
     FILTER_TICKET,
     START_LOADING,
     STOP_LOADING,
-    NO_TICKETS_FOUND, CHEAPEST_TICKETS, FIVE_TICKETS
+    NO_TICKETS_FOUND, CHEAPEST_TICKETS, FIVE_TICKETS, FASTEST_TICKETS
 } from "./types";
 
 const BASE_URL = 'https://aviasales-test-api.kata.academy';
@@ -162,12 +162,37 @@ export function cheapestTickets() {
             return a.price - b.price;
         }
 
-        const cheapest = tickets.sort(compareByPrice)
+        const cheapest = [...tickets].sort(compareByPrice);
 
         dispatch({
             type: CHEAPEST_TICKETS,
             payload: cheapest,
         })
+    }
+}
+
+export function fastestTickets() {
+    return (dispatch, getState) => {
+        const { tickets } = getState().ticket;
+
+        const minDuration = Math.min(
+            ...tickets.flatMap(ticket => ticket.segments.map(segment => segment.duration))
+        );
+
+
+        function compareByEqualDurations(a, b) {
+            const diffA = Math.abs(a.segments[0].duration - minDuration) + Math.abs(a.segments[1].duration - minDuration);
+            const diffB = Math.abs(b.segments[0].duration - minDuration) + Math.abs(b.segments[1].duration - minDuration);
+
+            return diffA - diffB;
+        }
+
+        const fastest = [...tickets].sort(compareByEqualDurations);
+
+        dispatch({
+            type: FASTEST_TICKETS,
+            payload: fastest,
+        });
     }
 }
 

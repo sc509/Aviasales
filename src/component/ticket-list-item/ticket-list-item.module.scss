@@ -1,5 +1,5 @@
 .ticket {
-  &__main {
+  &Main {
     text-align: left;
     margin-left: -51px;
     width: 502px;
@@ -12,16 +12,16 @@
     }
   }
 
-  &__company-name {
+  &Company-name {
     display: inline-block;
   }
 
-  &__bookingInfo {
+  &BookingInfo {
     display: flex;
     justify-content: space-between;
   }
 
-  &__price {
+  &Price {
     margin-left: 20px;
     margin-top: 26px;
     color: #2196F3;
@@ -30,7 +30,7 @@
     font-weight: 600;
   }
 
-  &__companyName {
+  &CompanyName {
     margin-top: 20px;
     margin-right: 55px;
   }

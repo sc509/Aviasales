@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { cheapestTickets, fastestTickets } from '../../redux/actions';
+import cheapestTicketsUtil from '../../Utilities/cheapestTicketsUtil';
+import fastestTicketsUtil from '../../Utilities/fastestTicketsUtil';
 
 import styles from './tabs.module.scss';
 
@@ -12,11 +13,11 @@ function Tabs() {
   const [activeTab, setActiveTab] = useState();
   const handleCheapestTab = () => {
     setActiveTab(cheapest);
-    dispatch(cheapestTickets());
+    dispatch(cheapestTicketsUtil());
   };
   const handleFastestTab = () => {
     setActiveTab(fastest);
-    dispatch(fastestTickets());
+    dispatch(fastestTicketsUtil());
   };
   const { aviasalesTabs, aviasalesTabsCheapest, aviasalesTabsFastest, aviasalesTabsActive } = styles;
   return (

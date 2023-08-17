@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { filterAllUnchecked, filterAllChecked, toggleCheck, filterTickets } from '../../redux/actions';
+import { filterAllUnchecked, filterAllChecked, toggleCheck } from '../../redux/actions';
+import filterTicketsUtil from '../../Utilities/filterTicketsUtil';
 
 import styles from './filter.module.scss';
 
@@ -11,7 +12,7 @@ function Filter() {
   const handleAllCheckBoxChange = (e) => {
     if (e.target.checked) {
       dispatch(filterAllChecked());
-      dispatch(filterTickets());
+      dispatch(filterTicketsUtil());
     } else {
       dispatch(filterAllUnchecked());
     }
@@ -19,7 +20,7 @@ function Filter() {
 
   const handleCheckBoxChange = (name) => {
     dispatch(toggleCheck(name));
-    dispatch(filterTickets());
+    dispatch(filterTicketsUtil());
   };
 
   const { aviasalesFilter, aviasalesFilterTitle, aviasalesFilterHover, checkboxContainer, checkboxContainerText } =

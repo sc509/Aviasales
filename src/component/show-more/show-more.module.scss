@@ -1,14 +1,15 @@
 .showMoreCont {
-  margin-left: -175px;
   margin-top: 20px;
+  text-align: left;
+  margin-left: -50px;
   @media(max-width: 1500px){
-    margin-left: -124px;
+    margin-left: -50px;
   }
   @media(max-width: 420px){
     margin-left: 0;
   }
   @media(max-width: 420px){
-    margin-left: 0;
+    margin-left: 10px;
   }
 }
 .showMoreButton{

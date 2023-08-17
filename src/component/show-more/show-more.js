@@ -1,20 +1,20 @@
-import { useDispatch } from 'react-redux';
-
-import { showMoreTickets } from '../../redux/actions';
+import React from 'react';
 
 import styles from './show-more.module.scss';
 
-function ShowMore() {
-  const showMore = 'Показать ещё 5 билетов!';
-  const dispatch = useDispatch();
+function ShowMore({ ticketCount, onClick }) {
+  const showMoreText = `Показать ещё ${ticketCount} билетов!`;
+
   const handleShowMoreClick = () => {
-    dispatch(showMoreTickets(5));
+    onClick();
   };
+
   const { showMoreCont, showMoreButton } = styles;
+
   return (
     <div className={showMoreCont}>
       <button type="button" className={showMoreButton} onClick={handleShowMoreClick}>
-        {showMore.toUpperCase()}
+        {showMoreText.toUpperCase()}
       </button>
     </div>
   );

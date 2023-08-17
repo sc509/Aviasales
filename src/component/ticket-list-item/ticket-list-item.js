@@ -1,10 +1,10 @@
 import TicketSegment from '../ticket-segment/ticket-segment';
-import companyLogo from '../../assets/S7 Logo.png';
 
 import styles from './ticket-list-item.module.scss';
 
 function TicketListItem({ ticket }) {
   const { ticketMain, ticketBookingInfo, ticketPrice, ticketCompanyName } = styles;
+
   return (
     <div className={ticketMain}>
       <div className={ticketBookingInfo}>
@@ -12,7 +12,7 @@ function TicketListItem({ ticket }) {
           <span>{ticket.price} </span>
         </div>
         <div className={ticketCompanyName}>
-          <img src={companyLogo} alt="Logo Company" />
+          <img src={`//pics.avs.io/99/36/${ticket.carrier}.png`} alt="Logo Company" />
         </div>
       </div>
       {ticket.segments.map((segment) => {

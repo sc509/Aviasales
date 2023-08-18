@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import cheapestTicketsUtil from '../../Utilities/cheapestTicketsUtil';
 import fastestTicketsUtil from '../../Utilities/fastestTicketsUtil';
+import { setActiveTab } from '../../redux/actions';
 
 import styles from './tabs.module.scss';
 
@@ -10,13 +11,15 @@ function Tabs() {
   const cheapest = 'Самый дешёвый';
   const fastest = 'Самый быстрый';
   const dispatch = useDispatch();
-  const [activeTab, setActiveTab] = useState();
+  const [activeTab, setActiveTabs] = useState();
   const handleCheapestTab = () => {
-    setActiveTab(cheapest);
+    setActiveTabs(cheapest);
+    dispatch(setActiveTab(cheapest));
     dispatch(cheapestTicketsUtil());
   };
   const handleFastestTab = () => {
-    setActiveTab(fastest);
+    setActiveTabs(fastest);
+    dispatch(setActiveTab(fastest));
     dispatch(fastestTicketsUtil());
   };
   const { aviasalesTabs, aviasalesTabsCheapest, aviasalesTabsFastest, aviasalesTabsActive } = styles;

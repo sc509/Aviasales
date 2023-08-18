@@ -6,6 +6,7 @@ import {
   GET_SEARCH_ID,
   START_LOADING,
   STOP_LOADING,
+  ACTIVE_TABS,
 } from './types';
 
 const BASE_URL = 'https://aviasales-test-api.kata.academy';
@@ -25,6 +26,11 @@ export function filterAllUnchecked() {
 export const toggleCheck = (name) => ({
   type: TOGGLE_CHECK,
   payload: name,
+});
+
+export const setActiveTab = (tab) => ({
+  type: ACTIVE_TABS,
+  payload: tab,
 });
 
 export function startLoading() {

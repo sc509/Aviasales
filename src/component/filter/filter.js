@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { filterAllUnchecked, filterAllChecked, toggleCheck } from '../../redux/actions';
 import filterTicketsUtil from '../../Utilities/filterTicketsUtil';
+import cheapestTicketsUtil from '../../Utilities/cheapestTicketsUtil';
+import fastestTicketsUtil from '../../Utilities/fastestTicketsUtil';
 
 import styles from './filter.module.scss';
 
@@ -9,10 +11,17 @@ function Filter() {
   const title = 'Количество пересадок';
   const dispatch = useDispatch();
   const { allChecked, oneChecked, twoChecked, threeChecked, fourChecked } = useSelector((state) => state.filter);
+  const activeTab = useSelector((state) => state.tabs.activeTabs);
   const handleAllCheckBoxChange = (e) => {
     if (e.target.checked) {
       dispatch(filterAllChecked());
       dispatch(filterTicketsUtil());
+
+      if (activeTab === 'Самый дешёвый') {
+        dispatch(cheapestTicketsUtil());
+      } else if (activeTab === 'Самый быстрый') {
+        dispatch(fastestTicketsUtil());
+      }
     } else {
       dispatch(filterAllUnchecked());
     }
@@ -21,6 +30,12 @@ function Filter() {
   const handleCheckBoxChange = (name) => {
     dispatch(toggleCheck(name));
     dispatch(filterTicketsUtil());
+
+    if (activeTab === 'Самый дешёвый') {
+      dispatch(cheapestTicketsUtil());
+    } else if (activeTab === 'Самый быстрый') {
+      dispatch(fastestTicketsUtil());
+    }
   };
 
   const { aviasalesFilter, aviasalesFilterTitle, aviasalesFilterHover, checkboxContainer, checkboxContainerText } =

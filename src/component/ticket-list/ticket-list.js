@@ -8,12 +8,12 @@ import ShowMore from '../show-more/show-more';
 import styles from './ticket-list.module.scss';
 
 function TicketList() {
-  const { error, aviasalesTicketList } = styles;
+  const { aviasalesTicketList, errorTickets } = styles;
   const dispatch = useDispatch();
   const searchId = useSelector((state) => state.ticket.searchId);
-  const tickets = useSelector((state) => state.ticket.tickets);
-  const noTicketsFounds = useSelector((state) => state.ticket.noTicketsFounds);
-
+  const allTickets = useSelector((state) => state.ticket.tickets);
+  const loading = useSelector((state) => state.ticket.loading);
+  const filters = useSelector((state) => state.filter);
   const [visibleTickets, setVisibleTickets] = useState(5);
 
   useEffect(() => {
@@ -30,17 +30,27 @@ function TicketList() {
     setVisibleTickets((prevVisibleTickets) => prevVisibleTickets + 5);
   };
 
-  if (noTicketsFounds) {
-    return <div className={error}>Рейсов, подходящих под заданные фильтры, не найдено</div>;
+  const isAnyFilterChecked = Object.values(filters).some((value) => value);
+
+  const isAllFilterChecked = filters.allChecked;
+
+  let ticketsToDisplay;
+  if (isAllFilterChecked) {
+    ticketsToDisplay = allTickets;
+  } else if (isAnyFilterChecked) {
+    ticketsToDisplay = allTickets;
+  } else {
+    ticketsToDisplay = [];
   }
 
   return (
     <div className={aviasalesTicketList}>
-      {tickets.slice(0, visibleTickets).map((ticket) => {
+      {ticketsToDisplay.slice(0, visibleTickets).map((ticket) => {
         const ticketKey = `${ticket.carrier}-${ticket.segments[0].date}-${ticket.segments[1].date}`;
         return <TicketListItem key={ticketKey} ticket={ticket} />;
       })}
-      {visibleTickets < tickets.length && <ShowMore ticketCount={5} onClick={handleShowMoreClick} />}
+      {ticketsToDisplay.length > visibleTickets && <ShowMore ticketCount={5} onClick={handleShowMoreClick} />}
+      {!loading && ticketsToDisplay.length === 0 && <div className={errorTickets}>Билеты не найдены</div>}
     </div>
   );
 }

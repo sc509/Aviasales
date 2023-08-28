@@ -12,7 +12,6 @@ import {
 const initialState = {
   searchId: null,
   tickets: [],
-  allTickets: [],
   loading: false,
   noTicketsFounds: false,
 };
@@ -28,7 +27,6 @@ const ticketReducer = (state = initialState, action) => {
       return {
         ...state,
         noTicketsFounds: false,
-        allTickets: [...state.allTickets, ...action.tickets],
         tickets: [...state.tickets, ...action.tickets],
       };
     case FILTER_TICKET:

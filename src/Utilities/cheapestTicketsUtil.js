@@ -1,18 +1,20 @@
-import { CHEAPEST_TICKETS } from '../redux/types';
+import removeDuplicates from './removeDuplicates';
+import matchesFilter from './matchesFilter';
 
-export default function cheapestTicketsUtil() {
-  return (dispatch, getState) => {
-    const { tickets } = getState().ticket;
+export default function cheapestTicketsUtil(tickets, filter) {
+  const { oneChecked, twoChecked, threeChecked, fourChecked } = filter;
 
-    function compareByPrice(a, b) {
-      return a.price - b.price;
-    }
+  const filteredTickets = tickets.filter((ticket) =>
+    matchesFilter(ticket, oneChecked, twoChecked, threeChecked, fourChecked)
+  );
 
-    const cheapest = [...tickets].sort(compareByPrice);
+  function compareByPrice(a, b) {
+    return a.price - b.price;
+  }
 
-    dispatch({
-      type: CHEAPEST_TICKETS,
-      payload: cheapest,
-    });
-  };
+  const cheapest = [...filteredTickets].sort(compareByPrice);
+  const ticketsCheapest = [...cheapest, ...tickets];
+
+  const ticketsCheapestWithoutDuplicates = removeDuplicates(ticketsCheapest);
+  return ticketsCheapestWithoutDuplicates;
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { CHEAPEST_TICKETS, FASTEST_TICKETS } from '../../redux/types';
 import cheapestTicketsUtil from '../../Utilities/cheapestTicketsUtil';
 import fastestTicketsUtil from '../../Utilities/fastestTicketsUtil';
 import { setActiveTab } from '../../redux/actions';
@@ -12,16 +13,29 @@ function Tabs() {
   const fastest = 'Самый быстрый';
   const dispatch = useDispatch();
   const [activeTab, setActiveTabs] = useState();
+  const tickets = useSelector((state) => state.ticket.tickets);
+  const filter = useSelector((state) => state.filter);
+
   const handleCheapestTab = () => {
     setActiveTabs(cheapest);
     dispatch(setActiveTab(cheapest));
-    dispatch(cheapestTicketsUtil());
+    const cheapestTickets = cheapestTicketsUtil(tickets, filter);
+    dispatch({
+      type: CHEAPEST_TICKETS,
+      payload: cheapestTickets,
+    });
   };
+
   const handleFastestTab = () => {
     setActiveTabs(fastest);
     dispatch(setActiveTab(fastest));
-    dispatch(fastestTicketsUtil());
+    const fastestTickets = fastestTicketsUtil(tickets, filter);
+    dispatch({
+      type: FASTEST_TICKETS,
+      payload: fastestTickets,
+    });
   };
+
   const { aviasalesTabs, aviasalesTabsCheapest, aviasalesTabsFastest, aviasalesTabsActive } = styles;
   return (
     <section className={aviasalesTabs}>

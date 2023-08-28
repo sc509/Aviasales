@@ -1,9 +1,6 @@
 import matchesFilter from './matchesFilter';
-import removeDuplicates from './removeDuplicates';
 
-export default function fastestTicketsUtil(tickets, filter) {
-  const { oneChecked, twoChecked, threeChecked, fourChecked } = filter;
-
+export default function sortFastestTickets(tickets, oneChecked, twoChecked, threeChecked, fourChecked) {
   const filteredTickets = tickets.filter((ticket) =>
     matchesFilter(ticket, oneChecked, twoChecked, threeChecked, fourChecked)
   );
@@ -19,8 +16,5 @@ export default function fastestTicketsUtil(tickets, filter) {
     return diffA - diffB;
   }
 
-  const fastest = [...filteredTickets].sort(compareByEqualDurations);
-  const ticketsFastest = [...fastest, ...tickets];
-  const ticketsFastestWithoutDuplicates = removeDuplicates(ticketsFastest);
-  return ticketsFastestWithoutDuplicates;
+  return [...filteredTickets].sort(compareByEqualDurations);
 }

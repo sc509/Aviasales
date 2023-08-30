@@ -1,1 +1,1 @@
-https://aviasales-kentormentor92-gmailcom.vercel.app
+https://aviasales-kentormentor92-gmailcom.vercel.app 

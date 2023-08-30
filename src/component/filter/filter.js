@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-import { filterAllChecked, filterAllUnchecked, setActiveTab, toggleCheck } from '../../redux/actions';
+import { filterAllChecked, filterAllUnchecked, toggleCheck } from '../../redux/actions';
 import filterTicketsUtil from '../../Utilities/filterTicketsUtil';
 import cheapestTicketsUtil from '../../Utilities/cheapestTicketsUtil';
 import fastestTicketsUtil from '../../Utilities/fastestTicketsUtil';
@@ -15,11 +16,28 @@ function Filter() {
   const activeTab = useSelector((state) => state.tabs.activeTabs);
   const filter = useSelector((state) => state.filter);
   const tickets = useSelector((state) => state.ticket.tickets);
-  const cheapest = 'Самый дешёвый';
-  const fastest = 'Самый быстрый';
+
+  const sortAndDispatchTickets = () => {
+    let sortedTickets = tickets;
+    if (activeTab === 'Самый дешёвый') {
+      sortedTickets = cheapestTicketsUtil(tickets, filter);
+      dispatch({
+        type: CHEAPEST_TICKETS,
+        payload: sortedTickets,
+      });
+    } else if (activeTab === 'Самый быстрый') {
+      sortedTickets = fastestTicketsUtil(tickets, filter);
+      dispatch({
+        type: FASTEST_TICKETS,
+        payload: sortedTickets,
+      });
+    }
+    dispatch({ type: FILTER_TICKET, payload: sortedTickets });
+  };
 
   const handleAllCheckBoxChange = (e) => {
-    if (e.target.checked) {
+    const newAllChecked = e.target.checked;
+    if (newAllChecked) {
       dispatch(filterAllChecked());
     } else {
       dispatch(filterAllUnchecked());
@@ -27,33 +45,17 @@ function Filter() {
     const allTickets = [...tickets];
     const filteredTickets = filterTicketsUtil(
       allTickets,
-      e.target.checked,
+      newAllChecked,
       oneChecked,
       twoChecked,
       threeChecked,
       fourChecked
     );
     dispatch({ type: FILTER_TICKET, payload: filteredTickets });
-
-    if (activeTab === 'Самый дешёвый') {
-      const cheapestTickets = cheapestTicketsUtil(filteredTickets, filter);
-      dispatch({
-        type: CHEAPEST_TICKETS,
-        payload: cheapestTickets,
-      });
-    }
-    if (activeTab === 'Самый быстрый') {
-      const fastestTickets = fastestTicketsUtil(filteredTickets, filter);
-      dispatch({
-        type: FASTEST_TICKETS,
-        payload: fastestTickets,
-      });
-    }
   };
 
   const handleCheckBoxChange = (name) => {
     dispatch(toggleCheck(name));
-    const newAllChecked = allChecked;
     let newOneChecked = oneChecked;
     let newTwoChecked = twoChecked;
     let newThreeChecked = threeChecked;
@@ -75,34 +77,21 @@ function Filter() {
       default:
         break;
     }
-    const allTickets = [...tickets];
+
     const sortedTickets = filterTicketsUtil(
-      allTickets,
-      newAllChecked,
+      tickets,
+      allChecked,
       newOneChecked,
       newTwoChecked,
       newThreeChecked,
       newFourChecked
     );
-    dispatch({ type: FILTER_TICKET, payload: sortedTickets });
 
-    if (activeTab === 'Самый дешёвый') {
-      const cheapestTickets = cheapestTicketsUtil(sortedTickets, filter);
-      dispatch(setActiveTab(cheapest));
-      dispatch({
-        type: CHEAPEST_TICKETS,
-        payload: cheapestTickets,
-      });
-    }
-    if (activeTab === 'Самый быстрый') {
-      const fastestTickets = fastestTicketsUtil(sortedTickets, filter);
-      dispatch(setActiveTab(fastest));
-      dispatch({
-        type: FASTEST_TICKETS,
-        payload: fastestTickets,
-      });
-    }
+    dispatch({ type: FILTER_TICKET, payload: sortedTickets });
   };
+  useEffect(() => {
+    sortAndDispatchTickets();
+  }, [filter]);
 
   const { aviasalesFilter, aviasalesFilterTitle, aviasalesFilterHover, checkboxContainer, checkboxContainerText } =
     styles;
